@@ -10,7 +10,7 @@ read USERNAME
 
 if [ "$($PSQL "SELECT EXISTS (SELECT 1 FROM users WHERE username = '$USERNAME')")" = "t" ]
 then
-  GAMES_PLAYED=$($PQSL "SELECT COUNT game_id FROM games WHERE username = '$USERNAME'")
+  GAMES_PLAYED=$($PSQL "SELECT COUNT(game_id) FROM games WHERE username = '$USERNAME'")
   BEST_GAME=$($PSQL "SELECT MIN(score) FROM games WHERE username = '$USERNAME'")
   echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
 else
@@ -41,3 +41,5 @@ do
 done 
 ((SCORE=SCORE+1))
 echo "You guessed it in $SCORE tries. The secret number was $SECRET_NUMBER. Nice job!"
+
+INSERT_GAME_RESPONSE=$($PSQL "INSERT INTO games (username, secret_number, score) VALUES ('$USERNAME', $SECRET_NUMBER, $SCORE)")
