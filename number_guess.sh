@@ -17,3 +17,12 @@ else
   echo "Welcome, $USERNAME! It looks like this is your first time here."
   INSERT_USERNAME_RESPONSE=$($PSQL "INSERT INTO users(username) VALUES('$USERNAME')")
 fi
+
+echo "Guess the secret number between 1 and 1000:"
+read GUESS
+
+while ! [[ "$GUESS" =~ ^[0-9]+$ ]]
+do
+  echo "That is not an integer, guess again:"
+  read GUESS
+done
