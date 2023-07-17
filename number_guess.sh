@@ -15,4 +15,5 @@ then
   echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
 else
   echo "Welcome, $USERNAME! It looks like this is your first time here."
+  INSERT_USERNAME_RESPONSE=$($PSQL "INSERT INTO users(username) VALUES('$USERNAME')")
 fi
